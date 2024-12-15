@@ -1,10 +1,9 @@
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 
 import java.time.Instant;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * For implement this task focus on clear code, and make this solution as simple readable as possible
@@ -16,6 +15,7 @@ import java.util.Optional;
  * This class could be auto tested
  */
 public class DocumentManager {
+    private Set<Document> documents = new HashSet<>();
 
     /**
      * Implementation of this method should upsert the document to your storage
@@ -24,9 +24,12 @@ public class DocumentManager {
      * @param document - document content and author data
      * @return saved document
      */
-    public Document save(Document document) {
-
-        return null;
+    public Document save(@NonNull Document document) {
+        if (document.id == null) {
+            document.id = UUID.randomUUID().toString();
+        }
+        documents.add(document);
+        return document;
     }
 
     /**
