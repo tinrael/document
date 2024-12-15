@@ -49,9 +49,10 @@ public class DocumentManager {
      * @param id - document id
      * @return optional document
      */
-    public Optional<Document> findById(String id) {
-
-        return Optional.empty();
+    public Optional<Document> findById(@NonNull String id) {
+        return documents.stream()
+                .filter(document -> id.equals(document.id))
+                .findAny();
     }
 
     @Data
