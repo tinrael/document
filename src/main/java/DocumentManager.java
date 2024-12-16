@@ -39,9 +39,10 @@ public class DocumentManager {
      * @param request - search request, each field could be null
      * @return list matched documents
      */
-    public List<Document> search(SearchRequest request) {
-
-        return Collections.emptyList();
+    public List<Document> search(@NonNull SearchRequest request) {
+        return documents.stream()
+                .filter(request::matches)
+                .toList();
     }
 
     /**
