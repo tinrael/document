@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  * This class could be auto tested
  */
 public class DocumentManager {
-    private Set<Document> documents = new HashSet<>();
+    private final Set<Document> documents = new HashSet<>();
 
     /**
      * Implementation of this method should upsert the document to your storage
