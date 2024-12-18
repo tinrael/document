@@ -68,24 +68,27 @@ public class DocumentManager {
 
         public boolean matches(@NonNull Document document) {
             if ((titlePrefixes != null)
-                    && titlePrefixes.stream().noneMatch(prefix -> document.title.regionMatches(true, 0, prefix, 0, prefix.length()))) {
+                    && ((document.title == null) || titlePrefixes.stream().noneMatch(prefix -> document.title.regionMatches(true, 0, prefix, 0, prefix.length())))) {
                 return false;
             }
 
             if ((containsContents != null)
-                    && containsContents.stream().noneMatch(containsContent -> Pattern.compile(Pattern.quote(containsContent), Pattern.CASE_INSENSITIVE).matcher(document.content).find())) {
+                    && ((document.content == null) || containsContents.stream().noneMatch(containsContent -> Pattern.compile(Pattern.quote(containsContent), Pattern.CASE_INSENSITIVE).matcher(document.content).find()))) {
                 return false;
             }
 
-            if ((authorIds != null) && !authorIds.contains(document.author.id)) {
+            if ((authorIds != null)
+                    && ((document.author == null) || !authorIds.contains(document.author.id))) {
                 return false;
             }
 
-            if ((createdFrom != null) && document.created.isBefore(createdFrom)) {
+            if ((createdFrom != null)
+                    && ((document.created == null) || document.created.isBefore(createdFrom))) {
                 return false;
             }
 
-            if ((createdTo != null) && document.created.isAfter(createdTo)) {
+            if ((createdTo != null)
+                    && ((document.created == null) || document.created.isAfter(createdTo))) {
                 return false;
             }
 
